@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="resource-blog" />
+        <module name="resource-shop" />
+        <module name="spring-authorization" />
+        <module name="spring-zuul" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="grafana-json-datasource" target="1.8" />
+      <module name="resource-blog" target="1.8" />
+      <module name="resource-shop" target="1.8" />
+      <module name="spring-authentication-ui" target="1.8" />
+      <module name="spring-authorization" target="1.8" />
+      <module name="spring-security-jwt" target="1.5" />
+      <module name="spring-zuul" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="grafana-json-datasource" options="-parameters" />
+      <module name="resource-blog" options="-parameters" />
+      <module name="resource-shop" options="-parameters" />
+      <module name="spring-authentication-ui" options="-parameters" />
+      <module name="spring-authorization" options="-parameters" />
+      <module name="spring-zuul" options="-parameters" />
+    </option>
+  </component>
+  <component name="TypeScriptCompiler">
+    <option name="useConfig" value="true" />
+  </component>
+</project>
