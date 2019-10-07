@@ -22,3 +22,9 @@ services:
     image: "gsuveti/resource-shop:latest"
     ports:
       - "8084:8084"
+
+  activemq:
+    image: "rmohr/activemq"
+    ports:
+      - "8161:8161"
+      - "61616:61616"
