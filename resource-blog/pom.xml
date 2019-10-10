@@ -131,19 +131,17 @@
                 </executions>
 
                 <configuration>
-                    <repository>gsuveti/${project.artifactId}</repository>
+                    <repository>irianro/${project.artifactId}</repository>
                     <googleContainerRegistryEnabled>false</googleContainerRegistryEnabled>
-<!--                    <tag>${project.version}</tag>-->
                     <tag>latest</tag>
                     <contextDirectory>..</contextDirectory>
-<!--                    <dockerfile>Dockerfile</dockerfile>-->
                     <buildArgs>
                         <JAR_FILE>resource-blog/target/${project.build.finalName}.jar</JAR_FILE>
                     </buildArgs>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
-
 </project>
+
+

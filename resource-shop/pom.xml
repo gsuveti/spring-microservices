@@ -17,6 +17,7 @@
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+        <dockerfile-maven.version>1.4.12</dockerfile-maven.version>
     </properties>
 
 
@@ -118,24 +119,25 @@
 
             <plugin>
                 <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>1.2.0</version>
-
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>${dockerfile-maven.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <imageName>gsuveti/${artifactId}</imageName>
-                    <baseImage>java</baseImage>
-                    <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
-                    <!-- copy the service's jar file from target into the root directory of the image -->
-                    <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
-                        </resource>
-                    </resources>
+                    <repository>irianro/${project.artifactId}</repository>
+                    <googleContainerRegistryEnabled>false</googleContainerRegistryEnabled>
+                    <tag>${project.version}</tag>
+                    <buildArgs>
+                        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                    </buildArgs>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 
