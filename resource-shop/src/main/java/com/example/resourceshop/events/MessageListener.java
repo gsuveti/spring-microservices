@@ -14,7 +14,7 @@ public class MessageListener {
     @JmsListener(
             destination = ResourceShopApplication.POSTS_MESSAGE_QUEUE,
             containerFactory = "jmsFactory",
-            subscription = "shop_durable_topic")
+            subscription = "shop_subscription")
     public void receiveMessages(Map<String, String> message) {
         log.info(message.get("id"));
         log.info(message.get("payload"));
