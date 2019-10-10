@@ -1,5 +1,9 @@
 package com.example.resourceblog.events;
 
+import com.example.resourceblog.messagebroker.api.BrokerEvent;
+import com.example.resourceblog.messagebroker.api.BrokerEventListener;
+import com.example.resourceblog.messagebroker.api.BrokerEventService;
+import com.example.resourceblog.messagebroker.api.PreSendMessageProcessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.activemq.command.ActiveMQMapMessage;
 import org.fusesource.hawtbuf.UTF8Buffer;
@@ -17,6 +21,9 @@ import java.util.logging.Logger;
 
 public class BrokerEventServiceImpl implements BrokerEventService {
     private static final Logger log = Logger.getLogger(BrokerEventServiceImpl.class.toString());
+    private static final String PAYLOAD = "PAYLOAD";
+    private static final String ID = "ID";
+
     private final JmsTemplate jmsTemplate;
     private final ObjectMapper jacksonObjectMapper;
 
@@ -34,8 +41,8 @@ public class BrokerEventServiceImpl implements BrokerEventService {
     @Override
     public void publishEvent(BrokerEvent event) throws IOException {
         Map<String, String> actionMap = new HashMap<>();
-        actionMap.put("id", UUID.randomUUID().toString());
-        actionMap.put("payload", new ObjectMapper().writeValueAsString(event.getPayload()));
+        actionMap.put(ID, UUID.randomUUID().toString());
+        actionMap.put(PAYLOAD, new ObjectMapper().writeValueAsString(event.getPayload()));
 
         this.jmsTemplate.convertAndSend(event.getEventName(), actionMap);
     }
@@ -45,7 +52,7 @@ public class BrokerEventServiceImpl implements BrokerEventService {
         if (registrar != null) {
             String eventName = brokerEventListener.evenName();
             String subscriptionName = brokerEventListener.subscriptionName();
-            String className = brokerEventListener.getClass().getName();
+            Class eventClass = brokerEventListener.eventClass();
 
             SimpleJmsListenerEndpoint endpoint = new SimpleJmsListenerEndpoint();
 
@@ -56,8 +63,8 @@ public class BrokerEventServiceImpl implements BrokerEventService {
             endpoint.setMessageListener(message -> {
                 try {
                     Map<String, Object> map = ((ActiveMQMapMessage) message).getContentMap();
-                    UTF8Buffer payloadBuffer = (UTF8Buffer) map.get("payload");
-                    brokerEventListener.onBrokerEvent(jacksonObjectMapper.readValue(payloadBuffer.getData(), brokerEventListener.eventClass()));
+                    UTF8Buffer payloadBuffer = (UTF8Buffer) map.get(PAYLOAD);
+                    brokerEventListener.onBrokerEvent(jacksonObjectMapper.readValue(payloadBuffer.getData(), eventClass));
                 } catch (IOException | JMSException e) {
                     e.printStackTrace();
                 }
@@ -67,5 +74,10 @@ public class BrokerEventServiceImpl implements BrokerEventService {
         }
 
         return CompletableFuture.completedFuture(null);
+    }
+
+    @Override
+    public void registerPreSendMessageProcessor(PreSendMessageProcessor preSendMessageProcessor) {
+        log.warning("Received message processor, however the current implementation does not support message processors");
     }
 }

@@ -1,6 +1,7 @@
 package com.example.resourceblog.events;
 
 import com.example.resourceblog.domain.Post;
+import com.example.resourceblog.messagebroker.api.BrokerEventService;
 import org.springframework.data.rest.core.annotation.HandleAfterSave;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.jms.core.JmsTemplate;

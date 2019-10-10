@@ -2,6 +2,7 @@ package com.example.resourceblog.events;
 
 import com.example.resourceblog.ResourceBlogApplication;
 import com.example.resourceblog.domain.Post;
+import com.example.resourceblog.messagebroker.api.BrokerEventListener;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Component;
 

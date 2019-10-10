@@ -1,6 +1,6 @@
 package com.example.resourceblog.config;
 
-import com.example.resourceblog.events.BrokerEventService;
+import com.example.resourceblog.messagebroker.api.BrokerEventService;
 import com.example.resourceblog.events.BrokerEventServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;

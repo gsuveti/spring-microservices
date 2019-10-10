@@ -1,6 +1,8 @@
 package com.example.resourceblog.events;
 
 import com.example.resourceblog.ResourceBlogApplication;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
@@ -13,10 +15,13 @@ public class MessageListener {
 
     @JmsListener(
             destination = ResourceBlogApplication.POSTS_MESSAGE_QUEUE,
-            containerFactory = "jmsFactory",
-            subscription = "blog_durable_topic")
+            containerFactory = "jmsListenerContainerFactory",
+            subscription = "blog_subscription_3")
     public void receiveMessages(Map<String, String> message) {
-        log.info(message.get("id"));
-        log.info(message.get("payload"));
+        try {
+            log.info(new ObjectMapper().writeValueAsString(message));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
     }
 }

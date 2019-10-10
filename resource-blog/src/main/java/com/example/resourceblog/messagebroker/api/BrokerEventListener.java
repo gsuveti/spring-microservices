@@ -1,4 +1,4 @@
-package com.example.resourceblog.events;
+package com.example.resourceblog.messagebroker.api;
 
 public interface BrokerEventListener<E> {
 
