@@ -132,7 +132,7 @@
                 <configuration>
                     <repository>irianro/${project.artifactId}</repository>
                     <googleContainerRegistryEnabled>false</googleContainerRegistryEnabled>
-                    <tag>${project.version}</tag>
+<!--                    <tag>${project.version}</tag>-->
                     <buildArgs>
                         <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
                     </buildArgs>

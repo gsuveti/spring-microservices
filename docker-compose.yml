@@ -1,7 +1,7 @@
 version: '3'
 services:
   gateway:
-    image: "gsuveti/spring-zuul:latest"
+    image: "irianro/spring-zuul:latest"
     ports:
       - "8080:8080"
     environment:
@@ -11,7 +11,7 @@ services:
       - BLOG_HOST=blog
 
   authorization:
-    image: "gsuveti/spring-authorization:latest"
+    image: "irianro/spring-authorization:latest"
 
   blog:
     image: "irianro/resource-blog:latest"
@@ -23,9 +23,13 @@ services:
       - "ACTIVEMQ_PASSWORD=admin"
 
   shop:
-    image: "gsuveti/resource-shop:latest"
+    image: "irianro/resource-shop:latest"
     ports:
       - "8084:8084"
+    environment:
+      - "ACTIVEMQ_URL=tcp://activemq:61616"
+      - "ACTIVEMQ_USER=admin"
+      - "ACTIVEMQ_PASSWORD=admin"
 
   activemq:
     image: "rmohr/activemq"

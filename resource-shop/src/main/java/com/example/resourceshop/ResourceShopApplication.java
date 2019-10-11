@@ -7,9 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.config.JmsListenerContainerFactory;
-import org.springframework.jms.connection.CachingConnectionFactory;
-
-import javax.jms.ConnectionFactory;
+import org.springframework.jms.connection.SingleConnectionFactory;
 
 @SpringBootApplication
 @EnableJpaRepositories
@@ -18,12 +16,12 @@ public class ResourceShopApplication {
     public static final String POSTS_MESSAGE_QUEUE = "POSTS_MESSAGE_QUEUE";
 
     @Bean
-    public JmsListenerContainerFactory<?> jmsFactory(ConnectionFactory connectionFactory, DefaultJmsListenerContainerFactoryConfigurer configurer) {
+    public JmsListenerContainerFactory<?> jmsFactory(SingleConnectionFactory connectionFactory, DefaultJmsListenerContainerFactoryConfigurer configurer) {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setPubSubDomain(true);
 
         factory.setSubscriptionDurable(true);
-        ((CachingConnectionFactory) connectionFactory).setClientId("shop");
+        connectionFactory.setClientId("shop");
         configurer.configure(factory, connectionFactory);
         return factory;
     }
