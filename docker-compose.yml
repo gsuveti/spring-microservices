@@ -14,9 +14,13 @@ services:
     image: "gsuveti/spring-authorization:latest"
 
   blog:
-    image: "gsuveti/resource-blog:latest"
+    image: "irianro/resource-blog:latest"
     ports:
       - "8083:8083"
+    environment:
+      - "ACTIVEMQ_URL=tcp://activemq:61616"
+      - "ACTIVEMQ_USER=admin"
+      - "ACTIVEMQ_PASSWORD=admin"
 
   shop:
     image: "gsuveti/resource-shop:latest"

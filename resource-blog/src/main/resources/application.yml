@@ -18,7 +18,9 @@ security:
 
 spring:
   activemq:
-    broker-url: tcp://localhost:61616
+    broker-url: ${ACTIVEMQ_URL:tcp://localhost:61616}
+    user: ${ACTIVEMQ_USER}
+    password: ${ACTIVEMQ_PASSWORD}
   jms:
     pub-sub-domain: true
   datasource:
