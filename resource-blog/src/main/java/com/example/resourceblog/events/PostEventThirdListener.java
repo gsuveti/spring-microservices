@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 @Component
-public class PostEventListener implements BrokerEventListener<Post> {
-    private static final Logger log = Logger.getLogger(PostEventListener.class.toString());
+public class PostEventThirdListener implements BrokerEventListener<Post> {
+    private static final Logger log = Logger.getLogger(PostEventThirdListener.class.toString());
 
     @Override
     public void onBrokerEvent(Post post) {

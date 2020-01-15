@@ -13,10 +13,7 @@ import java.util.logging.Logger;
 public class MessageListener {
     private static final Logger log = Logger.getLogger(MessageListener.class.toString());
 
-    @JmsListener(
-            destination = ResourceBlogApplication.POSTS_MESSAGE_QUEUE,
-            containerFactory = "jmsListenerContainerFactory",
-            subscription = "blog_subscription_3")
+    @JmsListener(destination = "Consumer.BLOG_SUBSCRIPTION.VirtualTopic." + ResourceBlogApplication.POSTS_MESSAGE_QUEUE)
     public void receiveMessages(Map<String, String> message) {
         try {
             log.info(new ObjectMapper().writeValueAsString(message));

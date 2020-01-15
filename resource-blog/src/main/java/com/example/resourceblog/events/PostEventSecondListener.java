@@ -29,7 +29,7 @@ public class PostEventSecondListener implements BrokerEventListener<Post> {
 
     @Override
     public String subscriptionName() {
-        return "blog_subscription_2";
+        return "BLOG_SUBSCRIPTION";
     }
 
     @Override

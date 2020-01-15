@@ -33,6 +33,8 @@ services:
 
   activemq:
     image: "rmohr/activemq"
+    volumes:
+      - "./activemq/conf/activemq.xml:/opt/apache-activemq-5.15.6/conf/activemq.xml"
     ports:
       - "8161:8161"
       - "61616:61616"

@@ -39,6 +39,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     }
 
     @Override
+
     public void configure(final ClientDetailsServiceConfigurer clients) throws Exception { // @formatter:off
         clients.inMemory()
                 .withClient("sampleClientId")
