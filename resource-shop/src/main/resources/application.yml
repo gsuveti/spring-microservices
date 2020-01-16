@@ -22,7 +22,7 @@ spring:
     user: ${ACTIVEMQ_USER}
     password: ${ACTIVEMQ_PASSWORD}
   jms:
-    pub-sub-domain: true
+    pub-sub-domain: false
   datasource:
     platform: h2
     url: jdbc:h2:mem:testdb

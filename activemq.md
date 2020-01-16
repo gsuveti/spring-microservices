@@ -110,8 +110,37 @@ E.g., let’s say we have a topic called VirtualTopic.Orders. (Where the prefix 
 
 With virtual topics we can just go right ahead and consume to queue Consumer.A.VirtualTopic.Orders to be a consumer for system A or consume to Consumer.B.VirtualTopic.Orders to be a consumer for system B.
 
+---
+## Demo
+
+Start Blog and Shop applications and update one post.
+
+```$xslt
+curl -X PATCH \
+  http://localhost:8083/api/posts/1 \
+  -H 'Accept: */*' \
+  -H 'Accept-Encoding: gzip, deflate' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Length: 22' \
+  -H 'Content-Type: application/json' \
+  -H 'Host: localhost:8083' \
+  -H 'Postman-Token: 984e91cf-2151-43df-9fcb-9d4af752353e,74e887b5-3f2b-4c45-b2a9-cddf9927cca7' \
+  -H 'User-Agent: PostmanRuntime/7.20.1' \
+  -H 'cache-control: no-cache' \
+  -d '{
+    "user": "George"
+}'
+```
+
+Both Blog and Shop apps should be notified about the change.
+
+---
+
 ## References
 
 
-https://tuhrig.de/virtual-topics-in-activemq/
-https://activemq.apache.org/virtual-destinations
+- https://tuhrig.de/virtual-topics-in-activemq/
+- https://activemq.apache.org/virtual-destinations
+- https://activemq.apache.org/what-is-the-difference-between-persistent-and-non-persistent-delivery
+- https://activemq.apache.org/how-do-durable-queues-and-topics-work

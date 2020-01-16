@@ -1,5 +1,6 @@
 package com.example.resourceblog.events;
 
+import com.example.resourceblog.ResourceBlogApplication;
 import com.example.resourceblog.messagebroker.api.BrokerEvent;
 import com.example.resourceblog.messagebroker.api.BrokerEventListener;
 import com.example.resourceblog.messagebroker.api.BrokerEventService;
@@ -18,8 +19,6 @@ import java.util.logging.Logger;
 
 public class BrokerEventServiceImpl implements BrokerEventService {
     private static final Logger log = Logger.getLogger(BrokerEventServiceImpl.class.toString());
-    private static final String PAYLOAD = "PAYLOAD";
-    private static final String ID = "ID";
 
     private final JmsTemplate jmsTemplate;
 
@@ -31,8 +30,8 @@ public class BrokerEventServiceImpl implements BrokerEventService {
     @Override
     public void publishEvent(BrokerEvent event) throws IOException {
         Map<String, String> actionMap = new HashMap<>();
-        actionMap.put(ID, UUID.randomUUID().toString());
-        actionMap.put(PAYLOAD, new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(event.getPayload()));
+        actionMap.put(ResourceBlogApplication.ID, UUID.randomUUID().toString());
+        actionMap.put(ResourceBlogApplication.PAYLOAD, new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(event.getPayload()));
 
         String destination = "VirtualTopic." + event.getEventName();
         this.jmsTemplate.convertAndSend(new ActiveMQTopic(destination), actionMap);

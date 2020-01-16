@@ -22,12 +22,13 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Logger;
 
+import static com.example.resourceblog.ResourceBlogApplication.PAYLOAD;
+
 @Configuration
 @EnableJms
 public class JmsConfig implements JmsListenerConfigurer {
 
     private static final Logger log = Logger.getLogger(JmsConfig.class.toString());
-    private static final String PAYLOAD = "PAYLOAD";
 
 
     private final ObjectMapper jacksonObjectMapper;

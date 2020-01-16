@@ -10,8 +10,8 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 @Component
-public class MessageListener {
-    private static final Logger log = Logger.getLogger(MessageListener.class.toString());
+public class SecondMessageListener {
+    private static final Logger log = Logger.getLogger(SecondMessageListener.class.toString());
 
     @JmsListener(
             destination = ResourceShopApplication.DESTINATION_PREFIX + ResourceShopApplication.POSTS_MESSAGE_QUEUE,
